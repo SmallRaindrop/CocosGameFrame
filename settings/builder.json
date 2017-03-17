@@ -1,0 +1,24 @@
+{
+  "appKey": "",
+  "appSecret": "",
+  "excludeScenes": [],
+  "includeAnySDK": false,
+  "includeSdk": [
+    "anysdk"
+  ],
+  "inlineSpriteFrames": true,
+  "mergeStartScene": false,
+  "oauthLoginServer": "",
+  "orientation": {
+    "landscapeLeft": true,
+    "landscapeRight": true,
+    "portrait": false,
+    "upsideDown": false
+  },
+  "packageName": "org.cocos2d.CocosGameFrame",
+  "privateKey": "",
+  "renderMode": "0",
+  "startScene": "f181f854-4c91-4703-8c33-20fc38bbbe04",
+  "title": "CocosGameFrame",
+  "webOrientation": "auto"
+}
