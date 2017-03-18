@@ -91,13 +91,14 @@ var AssetMgr = {
     /**
      * 加载图集
      */
-    loadAtlas: function(path) {
+    loadAtlas: function(path,callback) {
         cc.loader.loadRes(path,cc.SpriteAtlas,function (err,atlasLoaded) {
             if (err) {
                 cc.error(err.message || err);
-                return;
             }
-            cc.log(atlasLoaded);                      
+            else{
+                callback(atlasLoaded);
+            }                  
         });         
     },
 

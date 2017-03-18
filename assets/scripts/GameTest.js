@@ -1,5 +1,5 @@
-var AssetPath = require("./assetMgr/AssetPath.js");
-var AssetMgr = require("./assetMgr/AssetMgr.js");
+var ResPath = require("./ResPath.js");
+var ResMgr = require("./resMgr/ResMgr.js");
 
 cc.Class({
     extends: cc.Component,
@@ -10,13 +10,19 @@ cc.Class({
 
     // use this for initialization
     onLoad: function () {
+
+
         var self = this;
 
         cc.textureCache.dumpCachedTextureInfo();
         cc.log(Object.keys(cc.loader._cache));
 
         cc.log("图集加载测试");
-        AssetMgr.loadAtlas(AssetPath.AtlasPath.Common);
+        ResMgr.loadAtlas(ResPath.AtlasPath.Common,function(atlas){
+            cc.log(atlas);
+        });
+
+        // cc.loader.releaseAll();
 
         //scene 加载释放测试
         // cc.log("scene 加载释放测试");
