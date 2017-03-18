@@ -3,7 +3,7 @@
  */
 
 var PrefabPath = {
-
+    prefab: "/prefabs/prefab",
 };
 
 var AtlasPath = {

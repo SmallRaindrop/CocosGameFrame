@@ -1,5 +1,6 @@
 var ResPath = require("./ResPath.js");
-var ResMgr = require("./resMgr/ResMgr.js");
+var ResLoader = require("./resMgr/ResLoader.js");
+var TimeTake = require("./TimeTake.js")
 
 cc.Class({
     extends: cc.Component,
@@ -14,13 +15,34 @@ cc.Class({
 
         var self = this;
 
-        cc.textureCache.dumpCachedTextureInfo();
-        cc.log(Object.keys(cc.loader._cache));
 
-        cc.log("图集加载测试");
-        ResMgr.loadAtlas(ResPath.AtlasPath.Common,function(atlas){
-            cc.log(atlas);
-        });
+
+        //重复加载测试
+        // TimeTake.start("加载预制1");
+        // ResMgr.loadPrefab(ResPath.PrefabPath.prefab,function(prefab){
+        //     TimeTake.end("加载预制1");
+        //     TimeTake.start("加载预制2");
+        //     ResMgr.loadPrefab(ResPath.PrefabPath.prefab,function(prefab){
+        //         TimeTake.end("加载预制2");
+        //     });              
+        // }); 
+
+
+        // cc.textureCache.dumpCachedTextureInfo();
+        // cc.log(Object.keys(cc.loader._cache));             
+        // ResMgr.loadPrefab(ResPath.PrefabPath.prefab,function(prefab){
+        //     cc.log(prefab);
+        //     var node = cc.instantiate(prefab);
+        //     cc.director.getScene().addChild(node);
+        //     cc.log(Object.keys(cc.loader._cache));
+        // }); 
+
+        // cc.log("图集加载测试");
+        // ResMgr.loadAtlas(ResPath.AtlasPath.Common,function(atlas){
+        //     cc.log(atlas);
+        //     cc.log(Object.keys(cc.loader._cache));
+        //     cc.log(cc.loader._cache);
+        // });
 
         // cc.loader.releaseAll();
 
@@ -80,8 +102,18 @@ cc.Class({
         // });        
     },
 
-    // called every frame, uncomment this function to activate update callback
-    // update: function (dt) {
-
-    // },
+    prefabLoadTest: function(){
+        var self = this;
+        var prefabNode = self.node.getChildByName("prefab");
+        if(prefabNode == null){
+            ResLoader.loadPrefab(ResPath.PrefabPath.prefab,function(prefab){
+                var node = cc.instantiate(prefab);
+                node.name = "prefab";
+                node.parent = self.node;
+                cc.log(cc.loader._cache);
+            }); 
+        }else{
+            prefabNode.parent = null;
+        }      
+    },
 });
