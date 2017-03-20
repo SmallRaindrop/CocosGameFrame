@@ -106,14 +106,17 @@ cc.Class({
         var self = this;
         var prefabNode = self.node.getChildByName("prefab");
         if(prefabNode == null){
+            TimeTake.start("加载prefab");
             ResLoader.loadPrefab(ResPath.PrefabPath.prefab,function(prefab){
+                TimeTake.end("加载prefab");
                 var node = cc.instantiate(prefab);
                 node.name = "prefab";
                 node.parent = self.node;
-                cc.log(cc.loader._cache);
+                cc.log(Object.keys(cc.loader._cache));
             }); 
         }else{
             prefabNode.parent = null;
+            cc.log(Object.keys(cc.loader._cache));
         }      
     },
 });

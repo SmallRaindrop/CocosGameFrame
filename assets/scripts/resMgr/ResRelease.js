@@ -29,21 +29,24 @@ cc.Class({
         var self = this;
         self.releaseTextures = {};
         var texturesInCache =  _.filter(cc.loader._cache,function(asset){
-            return asset.content instanceof cc.Texture2D;
+            // return !(asset.content instanceof cc.Texture2D);
+            return true;
         });       
         texturesInCache.forEach(function(texture){
             self.releaseTextures[texture.url] = texture.url;
-        });     
+        });   
+        // remove all json and keep texture
+
         this._keepNodeTexture(cc.director.getScene());
-        var keys = [
-            "res/import/b5/b5a8f386-b64d-4a20-b2d2-34598d5890c6.json",
-            "res/import/6b/6ba33d50-1148-4c1c-b1b1-b4af992185c7.json",
-            "res/import/32/32ffad9d-458d-4fdf-b128-0b32a4f0b12c.json",
-            "res/import/40/40c2ef5b-b171-45ef-8188-1740a45ce92f.json",
-        ]; 
-        keys.forEach(function(key){
-            self.releaseTextures[key] = key;
-        });
+        // var keys = [
+        //     "res/import/b5/b5a8f386-b64d-4a20-b2d2-34598d5890c6.json",
+        //     "res/import/6b/6ba33d50-1148-4c1c-b1b1-b4af992185c7.json",
+        //     "res/import/32/32ffad9d-458d-4fdf-b128-0b32a4f0b12c.json",
+        //     "res/import/40/40c2ef5b-b171-45ef-8188-1740a45ce92f.json",
+        // ]; 
+        // keys.forEach(function(key){
+        //     self.releaseTextures[key] = key;
+        // });
         cc.log("释放了");
         cc.log(Object.keys(this.releaseTextures));
         for (var texture in this.releaseTextures) {
@@ -70,6 +73,7 @@ cc.Class({
     _executeKeep: function(node){
         var sprite = node.getComponent(cc.Sprite);
         if(sprite&&sprite.spriteFrame){
+            cc.log(sprite);
             delete this.releaseTextures[sprite.spriteFrame._textureFilename];
         }
         var button = node.getComponent(cc.Button);
